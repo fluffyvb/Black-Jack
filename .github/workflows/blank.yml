@@ -1,0 +1,72 @@
+from colorama import Fore
+import random
+deck = [2, 3, 4, 5, 6, 7, 8, 9, 10] * 4
+random.shuffle(deck)
+player = []
+dealer = []
+player.append(deck.pop())
+dealer.append(deck.pop())
+start = input(Fore.MAGENTA+"Do you wish to play PyJack, yes or no❤️ : ").lower()
+print()
+if start == "no":
+  print(Fore.RED+"Do come back to play later!! 👋")
+  print()
+elif start == "yes":
+  print(Fore.CYAN+"The card dealt to the you is ♠️♦️♥️♣️:",player)
+  print(Fore.CYAN+"The card dealt to the dealer is ♠️♦️♥️♣️:",dealer)
+  print()
+  
+  d_total = sum(dealer)
+  p_total = sum(player)
+  
+  print(Fore.BLUE+"The player will go first!!")
+  print()
+  x = input(Fore.GREEN+"Do you want to hit(h) or stand(s): ").lower()
+  print()
+  if x == "s":
+      print("Your turn is finished, now the dealer will play.😶‍🌫️")
+      print()
+  else:
+    while x == "h":
+        player.append(deck.pop())
+        print(Fore.WHITE+"The cards dealt to you are🃏:", player)
+        print()
+        p_total = sum(player)
+        print(Fore.WHITE+"The total of your cards is:", p_total)
+        print()
+        if p_total == 21:
+            print("✨You have reached 21. You have won!✨")
+            break
+        elif x == "s":
+            print(Fore.YELLOW+"Your turn is finished, now the dealer will play!😶‍🌫️")
+            print()
+            break
+        elif p_total > 21:
+            print(Fore.RED+"You have exceeded 21. You have lost 😔 and the dealer wins. ")
+            print()
+            break
+        x = input("Do you want to hit or stand? ").lower()
+        print()
+  
+
+  if p_total!=21 and x == "s":
+    while p_total!=21 and x == "s":
+        print(Fore.YELLOW+"The dealer will draw cards and the total will be shown")
+        print()
+        d_total = sum(dealer)
+        break
+    while d_total <= 17:
+      dealer.append(deck.pop())
+      print(Fore.WHITE+"The cards dealt to the dealer are🃏:", dealer)    
+      print()
+      d_total = sum(dealer)
+      print(Fore.WHITE+"The total for the dealer is:", d_total)
+      print()
+    if  d_total > p_total and d_total <=21:
+      print(Fore.RED+"The dealer has a higher count than the player and hence wins!!😭")
+    elif d_total < p_total<21:
+      print(Fore.MAGENTA+"The dealer has lower count than the player, hence the player wins😆!!")
+    elif d_total > 21:
+      print(Fore.MAGENTA+"The dealer has exceeded 21, hence loses and the player wins😅!!")
+    elif d_total == p_total:
+      print(Fore.GREEN+"Its a draw😐!!")
